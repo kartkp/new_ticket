@@ -5,7 +5,7 @@ import 'package:project_ticket/Pages/miscellaneous/profilePage.dart';
 import 'package:project_ticket/Pages/User_M/mHomePage.dart';
 import 'package:project_ticket/Pages/miscellaneous/helpAndSupport.dart';
 import '../../service/firebaseAuthService.dart';
-import '../../welcome_page.dart';
+import '../dialogBox/logOutAlertBox.dart';
 import '../miscellaneous/notification.dart';
 import '../miscellaneous/setting.dart';
 
@@ -20,6 +20,7 @@ class customDrawer extends StatelessWidget {
   final String? name = Auth().currentUser?.displayName;
 
   final String? email = Auth().currentUser?.email;
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +104,9 @@ class customDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.exit_to_app),
-              title: const Text(' Sign Out '),
+              title: const Text(' Log Out '),
               onTap: () {
-                Auth().signOut();
-                print("user logged in");
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const welcome_page()));
+                showLogoutConfirmation(context);
               },
             ),
             // ],)
